@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-zinc-800">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Run-Vanilla es una herramienta interactiva para escribir, editar y ejecutar código HTML, CSS y JavaScript en tiempo real, con soporte para Emmet y Monaco Editor.">
+    <meta name="keywords" content="editor de código, HTML, CSS, JavaScript, Emmet, Monaco Editor, desarrollo web, código en tiempo real">
+    <meta name="author" content="Ruiz Lautaro Elías">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="P3ikPs6mLtg7BBBFFK_fYxx0qJYnajGqaf_GCpU5otA" />
+    <title>run vanila</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+ <style>
+    html,body{
+        transition: 1s opacity;
+    }
+
+  /* Estilo para la gutter */
+  .gutter {
+      background-color: #1e1e1e;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      width: 2px !important;
+      transition: .5s
+
+    }
+    .gutter:hover{
+  width: 5px !important;
+  background-color: #ddd
+
+    }
+    .gutter.gutter-horizontal {
+      cursor: col-resize;
+    }
+
+
+
+.btn::before,.btn:focus{
+  outline: none !important;
+  border-radius: none !important;
+  offset: none !important;
+  box-shadow: none !important;
+}
+.sc::-webkit-scrollbar {
+        width: 5px;
+    }
+
+
+    .sc::-webkit-scrollbar-track {
+        background: #4e4e4e;
+        border-radius: 0px;
+    }
+
+    .sc::-webkit-scrollbar-thumb{
+        background: #7e7e7e;
+     
+    }
+
+</style>
+</head>
+<body class="  grid grid-cols-[50px_auto] max-md:block ">
+    <header class="w-[50px] h-[100dvh] max-md:[display:none] flex ">
+        <nav class="menu w-[50px] h-[100dvh] bg-zinc-700 shadow-[.1px_0_4px] z-30 block overflow-hidden">
+<div class="w-[100%] h-[calc(100%-90px)] block">
+  <abbr title="editores" class="outline-none">
+    <button class="btn border-l-emerald-500 border-l-[2px] btn w-[100%] mx-auto h-[50px] content-center outline-none" id="editores"> 
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
+          class="icon mx-auto text-slate-300  icon-tabler icons-tabler-outline icon-tabler-files"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 3v4a1 1 0 0 0 1 1h4" /><path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" /><path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" /></svg>
+    </button> 
+  </abbr>
+
+
+
+
+
+
+
+
+</div>
+<abbr  title="Descarga editor" class="outline-none">
+  <button class="btn btn w-[100%] text-slate-300 border-l-zinc-700 border-l-[2px]  mx-auto  content-center outline-none" > 
+  
+    <svg viewBox="0 0 1024 1024" width="30" height="30" class="block mx-auto" xmlns="http://www.w3.org/2000/svg" width="300" height="300"><path d="M725.333 1024H298.667a128 128 0 0 1-128-128V128a128 128 0 0 1 128-128h426.666a128 128 0 0 1 128 128v768a128 128 0 0 1-128 128zM298.667 85.333A42.667 42.667 0 0 0 256 128v768a42.667 42.667 0 0 0 42.667 42.667h426.666A42.667 42.667 0 0 0 768 896V128a42.667 42.667 0 0 0-42.667-42.667z" fill="currentColor"></path><path d="M469.33299999999997 853.333a42.667 42.667 0 1 0 85.334 0 42.667 42.667 0 1 0-85.334 0zM554.667 213.333h-85.334a42.667 42.667 0 0 1 0-85.333h85.334a42.667 42.667 0 0 1 0 85.333z" fill="currentColor"></path></svg>
+
+  
+    </button> 
+</abbr>
+
+
+<abbr title="Ajustes">
+  <button class="btn btn w-[100%] text-slate-300 border-l-zinc-700 border-l-[2px]  mx-auto h-[50px] content-center outline-none" id="ajustes">
+
+
+  <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
+    class="icon mx-auto text-slate-300  icon-tabler icons-tabler-outline icon-tabler-files"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
+  </button>
+</abbr>
+
+</nav>
+
+<div class="sc absolute text-zinc-300 w-[300px] bg-zinc-900 h-[100dvh] ml-[50px] translate-x-[-100%] transition-[0.5s]  z-20 overflow-auto" id="nabar">
+
+  <div class="bg-[#44475a] p-4 flex flex-col gap-4 col-span-1">
+
+
+
+    <label class="text-sm">Tema:</label>
+    <select id="theme" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="vs-dark">Oscuro</option>
+        <option value="vs-light">Claro</option>
+    </select>
+
+    <label class="text-sm">Tamaño de Fuente:</label>
+    <input id="fontSize" type="number" value="16" min="10" max="30" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+
+    <label class="text-sm">Minimapa:</label>
+    <select id="minimap" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="true">Activado</option>
+        <option value="false">Desactivado</option>
+    </select>
+
+    <label class="text-sm">Números de Línea:</label>
+    <select id="lineNumbers" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="on">Mostrar</option>
+        <option value="off">Ocultar</option>
+    </select>
+
+    <label class="text-sm">Ajuste de Línea:</label>
+    <select id="wordWrap" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="off">Desactivado</option>
+        <option value="on">Activado</option>
+        <option value="wordWrapColumn">En columna</option>
+        <option value="bounded">Limitado</option>
+    </select>
+
+    <label class="text-sm">Estilo de Cursor:</label>
+    <select id="cursorStyle" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="block">Bloque</option>
+        <option value="line">Línea</option>
+        <option value="underline">Subrayado</option>
+    </select>
+
+    <label class="text-sm">Parpadeo del Cursor:</label>
+    <select id="cursorBlinking" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="blink">Normal</option>
+        <option value="smooth">Suave</option>
+        <option value="phase">Fase</option>
+        <option value="expand">Expandir</option>
+        <option value="solid">Estático</option>
+    </select>
+
+    <label class="text-sm">Movimiento Suave del Cursor:</label>
+    <select id="cursorSmoothCaret" class="config p-2 bg-[#282a36] border border-[#1e1e1e1e] outline-none rounded">
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+    </select>
+
+    <button class="w-[100%] rounded-xl gap-1 justify-center bg-emerald-600 active:bg-emerald-700 transition-colors flex items-center p-2 configdown" >
+    
+
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M18 13l-6 6" /><path d="M6 13l6 6" /></svg>
+
+    Descargar configuracion
+  </button>
+
+    <button class="w-[100%] rounded-xl gap-1 justify-center bg-red-600 active:bg-red-700 transition-colors flex items-center p-2 recet" >
+      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-reload"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" /><path d="M20 4v5h-5" /></svg>
+    
+    
+      Restaurar ajustes
+    </button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+         </header>
+<main class="bg-zinc-800 text-white overflow-hidden h-[100dvh] flex flex-col-1 max-md:flex-col-2 " id="app">  
+    <main class="[display:none ]  h-[100dvh] w-[100%] max-md:min-w-[100%]" id="home" >
+        <div  class="flex cont h-[6dvh] items-center bg-[#1e1e1e]">
+         
+            <a draggable="true" href="#editorhtml" class="tanbsleng text-[90%]    h-[6dvh] min-h-[40px]    bg-[#2e2e2e]  truncate text-nowrap   transition-colors max-md:border-transparent max-md:h-[80%]  max-:md:w-[90%] w-[100%] max-md:m-1 text-center  font-mono  max-md:font-sans      border-b-2 border-orange-500 content-center">
+
+            index.html
+
+            </a>
+            <a draggable="true" href="#editorcss" class="tanbsleng text-[90%]     h-[6dvh] min-h-[40px]   truncate text-nowrap  transition-colors max-md:border-transparent max-:md:w-[90%] w-[100%] max-md:m-1   text-center  p-2 font-mono max-md:font-sans border-b-md border-b-2    border-cyan-500 content-center ">
+              Style.css
+
+            </a>
+            <a draggable="true" href="#editorjs" class="tanbsleng text-[95%]      h-[6dvh] min-h-[40px]   truncate text-nowrap transition-colors max-md:border-transparent  max-:md:w-[90%] w-[100%] max-md:m-1   text-center  p-2 font-mono max-md:font-sans border-b-md border-b-2    border-amber-400 content-center ">
+               Script.js
+
+            </a>
+            <a draggable="true" href="#web" class="max-md:mr-1  text-slate-400    h-[6dvh] min-h-[40px]    [display:none] max-md:block transition-colors max-md:border-transparent  w-fit   text-center  p-2 font-mono max-md:font-sans border-b-md border-b-2    border-emerald-300 content-center ">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="17"  height="17"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-player-play"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" /></svg>
+ 
+             </a>
+         
+        </div>
+        <div class="h-[94dvh]  overflow-hidden grid grid-cols-[100%_100%_100%]" style="scroll-snap-type: x mandatory;">
+            <div class="w-[100%] h-[100%] "style="scroll-snap-align:start">
+                <div class="w-[100%] h-[100%]" id="editorhtml"></div>
+            </div>
+            <div class="w-[100%] h-[100%] "style="scroll-snap-align:start">
+                <div class="w-[100%] h-[100%]" id="editorcss"></div>
+            </div>
+            <div class="w-[100%] h-[100%] "style="scroll-snap-align:start">
+                <div class="w-[100%] h-[100%]" id="editorjs"></div>
+            </div>
+        </div>
+    </main>
+
+<div class="w-[100%] h-[100%] max-md:min-w-[100%] overflow-hidden" id="web">
+    <div class="bg-[#444] gap-2 px-2  max-md:flex  [display:none] min-h-[40px]  h-[6dvh] z-20 items-center text-[#ccc]">
+
+     
+        <a href="#home" class="max-md:block [transition:.5s_opacity] active:opacity-[.4] [display:none]  bg-transparent   text-center  content-center ">
+
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="currentColor"  class="icon mx-auto icon-tabler icons-tabler-filled icon-tabler-arrow-big-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.586 4l-6.586 6.586a2 2 0 0 0 0 2.828l6.586 6.586a2 2 0 0 0 2.18 .434l.145 -.068a2 2 0 0 0 1.089 -1.78v-2.586h7a2 2 0 0 0 2 -2v-4l-.005 -.15a2 2 0 0 0 -1.995 -1.85l-7 -.001v-2.585a2 2 0 0 0 -3.414 -1.414z" /></svg>
+    
+           </a>
+           <button class="reload block  bg-transparent   [transition:.5s_opacity] active:opacity-[.4]  text-center  content-center ">
+
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="mx-auto icon icon-tabler icons-tabler-outline icon-tabler-reload"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" /><path d="M20 4v5h-5" /></svg>
+   </button>
+       <div class="flex bg-zinc-800 h-[75%] items-center   w-[100%]  rounded-md ">
+  
+    <input id="url" type="text" class="truncate rounded-md  bg-zinc-800 p-2 font-sans font-bold outline-none   w-[100%] h-[100%] "
+    placeholder="URL blob">
+
+
+       </div>
+        
+        </div>
+ 
+    <iframe id="priview"  
+     class="max-md:h-[94dvh] h-[100%] w-[100%] text-slate-300 bg-zinc-200" style="color: beige;"></iframe>
+
+</div>
+  
+</main>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.0/split.min.js"></script>
+<script src="./scripts/monaco/index.js"></script>
+<script src="./scripts/monaco/emmet.js"></script>
+    <script src="./scripts/variables.js"></script>
+<script type="module" src="./scripts/app.js"></script>
+<script src="./scripts/target.js"></script>
+
+</body>
+</html>
+
+
+
+
