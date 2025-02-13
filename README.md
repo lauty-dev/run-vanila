@@ -30,6 +30,3 @@ Run-Vanilla es un **editor de código online** que te permite escribir, editar y
 ├── 📄 index.html      # Estructura principal del editor
 ├── 📜 app.js         # Inicialización de Monaco Editor y ejecución de código
 ├── 📜 variables.js   # Configuraciones y almacenamiento local
-
-
-
